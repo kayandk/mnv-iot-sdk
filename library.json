@@ -1,0 +1,23 @@
+{
+  "name": "mnv-iot-sdk",
+  "version": "1.1.0",
+  "description": "Secure IoT SDK for MNV-IoT ecosystem with JWT authentication over MQTT.",
+  "keywords": "iot, esp32, mqtt, jwt, secure, mnv",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mnv-iot/mnv-iot-sdk"
+  },
+  "authors": [
+    {
+      "name": "MNV Team",
+      "email": "support@mnv.vn",
+      "url": "https://mnv.vn"
+    }
+  ],
+  "dependencies": {
+    "knolleary/PubSubClient": "^2.8",
+    "bblanchon/ArduinoJson": "^7.0.0"
+  },
+  "frameworks": "arduino",
+  "platforms": "espressif32"
+}

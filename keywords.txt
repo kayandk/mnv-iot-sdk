@@ -1,0 +1,29 @@
+#######################################
+# Syntax Coloring Map For MNV-IoT SDK
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+IoTClient	KEYWORD1
+MqttManager	KEYWORD1
+DeviceAuth	KEYWORD1
+MQTTConfig	KEYWORD1
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+begin	KEYWORD2
+connect	KEYWORD2
+loop	KEYWORD2
+publishTelemetry	KEYWORD2
+publishState	KEYWORD2
+publishRpcResponse	KEYWORD2
+onCommand	KEYWORD2
+isConnected	KEYWORD2
+getLastError	KEYWORD2
+
+#######################################
+# Constants (LITERAL1)
+#######################################
+mnv	KEYWORD1
