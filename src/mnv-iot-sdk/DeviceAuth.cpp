@@ -16,7 +16,7 @@ bool DeviceAuth::authenticate(const String& deviceId, const String& secret, MQTT
     http.begin(url);
     http.addHeader("Content-Type", "application/json");
 
-    StaticJsonDocument<256> reqDoc;
+    JsonDocument reqDoc;
     reqDoc["deviceId"] = deviceId;
     reqDoc["secret"] = secret;
 
@@ -27,7 +27,7 @@ bool DeviceAuth::authenticate(const String& deviceId, const String& secret, MQTT
 
     if (httpCode == HTTP_CODE_OK) {
         String payload = http.getString();
-        StaticJsonDocument<1024> resDoc;
+        JsonDocument resDoc;
         DeserializationError error = deserializeJson(resDoc, payload);
 
         if (error) {

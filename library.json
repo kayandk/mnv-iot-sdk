@@ -1,6 +1,6 @@
 {
   "name": "mnv-iot-sdk",
-  "version": "1.1.0",
+  "version": "1.1.2",
   "description": "Secure IoT SDK for MNV-IoT ecosystem with JWT authentication over MQTT.",
   "keywords": "iot, esp32, mqtt, jwt, secure, mnv",
   "repository": {
