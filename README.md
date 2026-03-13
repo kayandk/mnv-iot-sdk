@@ -1,6 +1,6 @@
 # MNV-IoT ESP32 SDK
 
-[![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)](https://github.com/mnv-iot/mnv-iot-sdk)
+[![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)](https://github.com/kayandk/mnv-iot-sdk)
 [![Platform](https://img.shields.io/badge/platform-ESP32-orange.svg)](https://espressif.com/en/products/socs/esp32)
 
 SDK chuyên dụng cho việc kết nối các thiết bị ESP32 vào hệ sinh thái **MNV-IoT**. Hỗ trợ cơ chế xác thực bảo mật qua JWT, quản lý kết nối MQTT thông minh và tích hợp sẵn các tính năng giám sát (LWT) cũng như điều khiển thời gian thực (RPC).
@@ -26,7 +26,7 @@ Thêm vào file `platformio.ini`:
 lib_deps =
     ArduinoJson
     PubSubClient
-    https://github.com/mnv-iot/mnv-iot-sdk
+    https://github.com/kayandk/mnv-iot-sdk
 ```
 
 ## Hướng dẫn sử dụng nhanh

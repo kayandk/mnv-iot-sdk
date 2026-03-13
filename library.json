@@ -5,7 +5,7 @@
   "keywords": "iot, esp32, mqtt, jwt, secure, mnv",
   "repository": {
     "type": "git",
-    "url": "https://github.com/mnv-iot/mnv-iot-sdk"
+    "url": "https://github.com/kayandk/mnv-iot-sdk"
   },
   "authors": [
     {
