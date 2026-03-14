@@ -68,9 +68,10 @@ void loop() {
 ### `IoTClient`
 - `begin(deviceId, secret)`: Khởi tạo thông tin thiết bị.
 - `connect()`: Thực hiện xác thực và kết nối MQTT. 
-- `publishTelemetry(json)`: Gửi dữ liệu cảm biến.
-- `onCommand(callback)`: Đăng ký nhận lệnh từ Dashboard.
-- `publishRpcResponse(json)`: Phản hồi lệnh RPC.
+- `publishTelemetry(json)`: Gửi dữ liệu cảm biến (nhiệt độ, độ ẩm...).
+- `publishAttributes(json)`: Gửi thuộc tính hệ thống (IP, RSSI, Version...).
+- `onCommand(callback)`: Đăng ký nhận lệnh điều khiển hoặc yêu cầu RPC từ Dashboard.
+- `publishRpcResponse(json)`: Phản hồi lại kết quả của lệnh RPC.
 
 ## Giấy phép
 Bản quyền thuộc về **MNV Team**. Liên hệ [support@mnv.vn](mailto:support@mnv.vn) để biết thêm chi tiết.

@@ -20,7 +20,7 @@ bool MqttManager::connect(const MQTTConfig& config) {
     String lwtPayload = "{\"online\":false}";
 
     if (_client.connect(config.clientId.c_str(), 
-                        config.username.c_str(), 
+                        config.clientId.c_str(), // Use deviceId as username
                         config.token.c_str(),
                         statusTopic, 
                         1, // QOS
@@ -36,6 +36,14 @@ bool MqttManager::connect(const MQTTConfig& config) {
         char rpcTopic[128];
         snprintf(rpcTopic, sizeof(rpcTopic), TOPIC_RPC_REQ, _deviceId.c_str());
         _client.subscribe(rpcTopic);
+
+        // Subscribe to Profile OTA topic
+        _profileId = config.profileId;
+        if (_profileId.length() > 0) {
+            char pOtaTopic[128];
+            snprintf(pOtaTopic, sizeof(pOtaTopic), TOPIC_PROFILE_OTA, _profileId.c_str());
+            _client.subscribe(pOtaTopic);
+        }
 
         // Send Online status
         publishState(_deviceId, "{\"online\":true}");
@@ -68,6 +76,12 @@ bool MqttManager::publishState(const String& deviceId, const String& payload) {
 bool MqttManager::publishRpcResponse(const String& deviceId, const String& payload) {
     char topic[128];
     snprintf(topic, sizeof(topic), TOPIC_RPC_RES, deviceId.c_str());
+    return _client.publish(topic, payload.c_str());
+}
+
+bool MqttManager::publishAttributes(const String& deviceId, const String& payload) {
+    char topic[128];
+    snprintf(topic, sizeof(topic), TOPIC_ATTRIBUTES, deviceId.c_str());
     return _client.publish(topic, payload.c_str());
 }
 

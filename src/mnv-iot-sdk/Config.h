@@ -19,6 +19,7 @@ struct MQTTConfig {
     String clientId;  ///< Unique Client ID
     String username;  ///< Device ID or Username
     String token;     ///< JWT Token for password authentication
+    String profileId; ///< Device Profile ID for broadcast updates
 };
 
 // MQTT Topic Patterns
@@ -29,6 +30,7 @@ struct MQTTConfig {
 #define TOPIC_STATUS "devices/%s/status" ///< Topic for LWT (Online/Offline)
 #define TOPIC_RPC_REQ "devices/%s/rpc/request" ///< Topic for RPC requests
 #define TOPIC_RPC_RES "devices/%s/rpc/response" ///< Topic for RPC responses
+#define TOPIC_PROFILE_OTA "devices/profile/%s/ota" ///< Topic for broadcast OTA updates
 
 } // namespace mnv
 

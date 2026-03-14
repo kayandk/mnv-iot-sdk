@@ -63,6 +63,11 @@ public:
     bool publishRpcResponse(const String& deviceId, const String& payload);
 
     /**
+     * @brief Publish device attributes.
+     */
+    bool publishAttributes(const String& deviceId, const String& payload);
+
+    /**
      * @brief Set the handler for incoming commands/RPCs.
      */
     void setCommandCallback(CommandCallback callback);
@@ -70,6 +75,7 @@ public:
 private:
     PubSubClient _client;
     String _deviceId;
+    String _profileId;
     CommandCallback _commandCallback;
     
     void _onMessage(char* topic, byte* payload, unsigned int length);

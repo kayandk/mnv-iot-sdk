@@ -41,6 +41,7 @@ bool DeviceAuth::authenticate(const String& deviceId, const String& secret, MQTT
         config.clientId = resDoc["clientId"].as<String>();
         config.username = resDoc["username"].as<String>();
         config.token = resDoc["password"].as<String>();
+        config.profileId = resDoc["profileId"].as<String>();
 
         http.end();
         return true;

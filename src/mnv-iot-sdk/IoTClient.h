@@ -59,6 +59,12 @@ public:
     bool publishState(const String& stateData);
 
     /**
+     * @brief Publish device attributes (IP, RSSI, Version).
+     * @param jsonAttributes JSON string of attributes.
+     */
+    bool publishAttributes(const String& jsonAttributes);
+
+    /**
      * @brief Publish binary/JSON response to an RPC request.
      */
     bool publishRpcResponse(const String& responseData);
@@ -78,6 +84,12 @@ public:
      * @brief Retrieve detailed error message if a task fails.
      */
     String getLastError() const;
+
+    /**
+     * @brief Start an Access Point with a configuration web portal.
+     * Blocks until config is saved. Will restart the device upon completion.
+     */
+    void startSmartConfig();
 
 private:
     String _apiBaseUrl;

@@ -1,5 +1,8 @@
 #include "IoTClient.h"
 
+#include "ConfigPortal.h"
+#include <Preferences.h>
+
 namespace mnv {
 
 IoTClient::IoTClient(const String& apiBaseUrl) 
@@ -13,8 +16,22 @@ void IoTClient::begin(const String& deviceId, const String& secret) {
 
 bool IoTClient::connect() {
     if (!_isInitialized) {
-        _lastError = "Not initialized. Call begin() first.";
-        return false;
+        // Try to load from flash if not initialized
+        Preferences prefs;
+        prefs.begin("mnv-iot", true);
+        _deviceId = prefs.getString("dev_id", "");
+        _secret = prefs.getString("dev_sec", "");
+        String savedSsid = prefs.getString("w_ssid", "");
+        String savedPass = prefs.getString("w_pass", "");
+        prefs.end();
+
+        if (_deviceId != "" && savedSsid != "") {
+             WiFi.begin(savedSsid.c_str(), savedPass.c_str());
+             _isInitialized = true;
+        } else {
+            _lastError = "Not initialized and no saved config found.";
+            return false;
+        }
     }
 
     // 1. WiFi check
@@ -74,6 +91,10 @@ bool IoTClient::publishRpcResponse(const String& responseData) {
     return _mqtt.publishRpcResponse(_deviceId, responseData);
 }
 
+bool IoTClient::publishAttributes(const String& jsonAttributes) {
+    return _mqtt.publishAttributes(_deviceId, jsonAttributes);
+}
+
 void IoTClient::onCommand(CommandCallback callback) {
     _mqtt.setCommandCallback(callback);
 }
@@ -84,6 +105,29 @@ bool IoTClient::isConnected() {
 
 String IoTClient::getLastError() const {
     return _lastError;
+}
+
+void IoTClient::startSmartConfig() {
+    ConfigPortal portal;
+    String apSsid = "MNV-IoT-" + (_deviceId != "" ? _deviceId : String((uint32_t)ESP.getEfuseMac(), HEX));
+    portal.start(apSsid, _deviceId);
+
+    while (!portal.isConfigDone()) {
+        portal.loop();
+        delay(1);
+    }
+
+    // Save to flash
+    Preferences prefs;
+    prefs.begin("mnv-iot", false);
+    prefs.putString("w_ssid", portal.getSsid());
+    prefs.putString("w_pass", portal.getPassword());
+    prefs.putString("dev_id", portal.getDeviceId());
+    prefs.putString("dev_sec", portal.getSecret());
+    prefs.end();
+
+    Serial.println("[IoT SDK] Config saved to flash. Restarting...");
+    ESP.restart();
 }
 
 } // namespace mnv
